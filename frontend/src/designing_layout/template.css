@@ -1,0 +1,112 @@
+:root {
+  --header-container-height: 80px;
+  --footer-container-height: 40px;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #BDC3C7;
+}
+
+#header-container {
+  background-color: #E5E7E9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-container-height);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.19);
+}
+
+#navbar-menu {
+  list-style: none;
+  font-size: small;
+  text-transform: lowercase;
+  text-align: center;
+}
+
+.navbar-menu-item {
+  display: inline;
+  padding: 0.5em;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Yusei Magic', sans-serif;
+  text-transform: lowercase;
+  font-size: larger;
+}
+
+#footer-container {
+  background-color: #E5E7E9;
+  height: var(--footer-container-height);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 -1px 2px rgba(0,0,0,0.19);
+}
+
+#searchbar {
+  vertical-align: middle;
+  float: right;
+  padding-right: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+#canvas {
+  margin-top: var(--header-container-height);
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+}
+
+.card-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(autofill, 1fr);
+  grid-auto-rows: auto;
+}
+
+.card {
+  box-shadow: 0 5px 10px rgba(0,0,0,0.19);
+  border-radius: 3px;
+  width: 25%;
+  padding: 0.25em;
+  margin: 0.5em;
+  background-color: #F2F3F4;
+}
+
+.card-title {
+  text-align: center;
+  font-size: medium;
+}
+
+.card-logo {
+  border-radius: 3px;
+  width: 85%;
+  display: block;
+  padding: 3px;
+  margin: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-tagline {
+  text-align: justify;
+  font-size: smaller;
+  margin: 0.5em;
+}
+
+#eclipse-phase-logo {
+  background-color: black;
+}
+
+.sidebar {
+  margin-top: var(--footer-container-height);
+  width: 50%;
+  background-color: #FFFFFF;
+  min-height: 100%;
+}
