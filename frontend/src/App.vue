@@ -1,19 +1,29 @@
 <template>
-  <Header />
+  <HeaderContainer />
   <div id="page-content">
     <router-view />
   </div>
-  <Footer />
+  <FooterContainer />
 </template>
 
 <script>
-import Header from '@/components/Header.vue';
-import Footer from '@/components/Footer.vue';
+import HeaderContainer from '@/components/HeaderContainer.vue';
+import FooterContainer from '@/components/FooterContainer.vue';
 
 export default {
   components: {
-    Header,
-    Footer,
+    HeaderContainer,
+    FooterContainer,
   },
 };
 </script>
+
+<style scoped>
+#page-content {
+  margin-top: var(--header-container-height);
+  margin-bottom: var(--footer-container-height);
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+}
+</style>

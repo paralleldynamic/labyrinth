@@ -1,17 +1,15 @@
 <template>
-  <div class="canvas">
-    <Canvas />
-  </div>
+  <PageWrapper />
 </template>
 
 <script>
 // @ is an alias to /src
-import Canvas from '../components/Canvas.vue';
+import PageWrapper from '../components/PageWrapper.vue';
 
 export default {
   name: 'Games',
   components: {
-    Canvas,
+    PageWrapper,
   },
 };
 </script>
