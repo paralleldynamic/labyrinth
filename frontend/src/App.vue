@@ -1,14 +1,19 @@
 <template>
-  <header id="header">
-    <nav id="header-nav-bar">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-  </header>
-  <div>
+  <Header />
+  <div id="page-content">
     <router-view/>
   </div>
 </template>
+
+<script>
+import Header from '@/components/Header.vue';
+
+export default {
+  components: {
+    Header,
+  },
+};
+</script>
 
 <style>
 #app {
