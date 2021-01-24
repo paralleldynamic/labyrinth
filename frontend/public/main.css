@@ -1,0 +1,15 @@
+:root {
+  --header-container-height: 80px;
+  --footer-container-height: 40px;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #BDC3C7;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Yusei Magic', sans-serif;
+  text-transform: lowercase;
+  font-size: larger;
+}
