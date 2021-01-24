@@ -1,5 +1,5 @@
 <template>
-  <div class='base-layout'>
+  <div class='canvas'>
     Base Layout lorem ipsum<br>
     This contains the canvas to hold the rest of the site.
   </div>
@@ -7,12 +7,12 @@
 
 <script>
 export default {
-  name: 'base-layout',
+  name: 'canvas',
 };
 </script>
 
 <style scoped>
-.base-layout {
+.canvas {
   padding: 20px;
 }
 </style>
