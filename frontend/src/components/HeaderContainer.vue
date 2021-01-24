@@ -26,6 +26,12 @@ export default {
 </script>
 
 <style scoped>
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 #header-container {
   background-color: #E5E7E9;
   position: fixed;
@@ -39,6 +45,8 @@ export default {
 #navbar-title {
   margin: 0.25em;
   margin-bottom: 0.4em;
+
+  text-transform: lowercase;
 }
 #navbar-menu {
   display: block;
