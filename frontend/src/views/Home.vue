@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <BaseLayout />
+    <Canvas />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import BaseLayout from '@/components/BaseLayout.vue';
+import Canvas from '../components/Canvas.vue';
 
 export default {
   name: 'Home',
   components: {
-    BaseLayout,
+    Canvas,
   },
 };
 </script>
