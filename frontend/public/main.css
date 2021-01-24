@@ -1,11 +1,12 @@
 :root {
-  --header-container-height: 80px;
+  --header-container-height: 65px;
   --footer-container-height: 40px;
 }
 
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: #BDC3C7;
+  height: calc(100vh - var(--footer-container-height) - var(--header-container-height));
 }
 
 h1, h2, h3, h4 {
