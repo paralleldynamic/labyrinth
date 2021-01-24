@@ -5,11 +5,13 @@
         <div>
           <h1 id="navbar-title">the labyrinth</h1>
         </div>
-        <router-link class="navbar-menu-item" to="/">Homes</router-link>
-        <router-link class="navbar-menu-item" to="/about">About</router-link>
-        <router-link class="navbar-menu-item" to="/games">Games</router-link>
-        <router-link class="navbar-menu-item" to="/campaigns">Campaigns</router-link>
-        <router-link class="navbar-menu-item" to="/stories">Stories</router-link>
+        <div id="navbar-menu-items-container">
+          <router-link class="navbar-menu-item" to="/">Homes</router-link>
+          <router-link class="navbar-menu-item" to="/about">About</router-link>
+          <router-link class="navbar-menu-item" to="/games">Games</router-link>
+          <router-link class="navbar-menu-item" to="/campaigns">Campaigns</router-link>
+          <router-link class="navbar-menu-item" to="/stories">Stories</router-link>
+        </div>
       </nav>
     </header>
   </div>
@@ -34,15 +36,30 @@ export default {
   box-shadow: 0 1px 2px rgba(0,0,0,0.19);
 }
 
+#navbar-title {
+  margin: 0.25em;
+  margin-bottom: 0.4em;
+}
 #navbar-menu {
-  list-style: none;
+  display: block;
   font-size: small;
   text-transform: lowercase;
   text-align: center;
 }
 
+#navbar-menu-items-container {
+
+}
+
 .navbar-menu-item {
   display: inline;
-  padding: 0.5em;
+  margin: 0.5em;
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar-menu-item:hover {
+  font-size: smaller;
+  font-weight: bolder;
 }
 </style>
