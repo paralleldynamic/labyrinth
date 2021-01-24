@@ -1,25 +1,41 @@
 <template>
-  <div class="card">
-    <header class="card-header">
-      <a href="https://eclipsephase.com/">
-        <img id="eclipse-phase-logo" class="card-logo" src="https://eclipsephase.com/sites/all/themes/eclipse/logo.png" alt="eclipse phase logo">
-      </a>
-    </header>
-    <h2 class="card-title">eclipse phase</h2>
-    <p class="card-tagline">a game of transhuman horror</p>
-  </div>
-  <div class="card">
-    <a href="https://www.fantasyflightgames.com/en/products/genesys/">
-      <img id="genesys-logo" class="card-logo" src="https://images-cdn.fantasyflightgames.com/filer_public/70/67/7067c9e1-60bb-49ae-9b11-7d6e7926961d/gns01_anc_slider.jpg" alt="genesys logo">
-    </a>
-    <h2 class="card-title">Genesys</h2>
-    <p class="card-tagline">a universal RPG based around narrative control</p>
+  <div class="card" v-for="card in cards" v-bind:key="card">
+    <div class="card-header">
+      <a v-bind:href="card.website">
+        <img class="card-logo" v-bind:src="card.logo_img_src"
+                               v-bind:alt="card.logo_img_alt"
+                               v-bind:style="card.logo_img_style">
+        </a>
+    </div>
+    <h2 class="card-title">{{ card.title }}</h2>
+    <p class="card-tagline">{{ card.tagline }}</p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'ContentCard',
+  data() {
+    return {
+      cards: [],
+    };
+  },
+  methods: {
+    getCards() {
+      const path = 'http://localhost:5000/games';
+      this.axios.get(path)
+        .then((res) => {
+          this.cards = res.data.cards;
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
+    },
+  },
+  created() {
+    this.getCards();
+  },
 };
 </script>
 
@@ -52,9 +68,5 @@ export default {
   text-align: justify;
   font-size: smaller;
   margin: 0.5em;
-}
-
-#eclipse-phase-logo {
-  background-color: black;
 }
 </style>

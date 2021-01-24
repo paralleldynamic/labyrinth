@@ -11,6 +11,9 @@ game_cards = [
         'logo_img_src': 'https://eclipsephase.com/sites/all/themes/eclipse/logo.png',
         'logo_img_alt': 'eclipse phase logo',
         'tagline': 'a game of transhuman horror',
+        'logo_img_style': {
+            'background-color': 'black',
+        }
     },
     {
         'title': 'Genesys',
@@ -34,9 +37,12 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 
 # sanity check route
-@app.route('/ping', methods=['GET'])
-def ping_pong():
-    return jsonify('pong!')
+@app.route('/games', methods=['GET'])
+def all_games():
+    return jsonify({
+        'status': 'success',
+        'cards': game_cards,
+    })
 
 
 if __name__ == '__main__':
