@@ -1,5 +1,5 @@
 <template>
-  <div class='canvas'>
+  <div class='page-wrapper'>
     Base Layout lorem ipsum<br>
     This contains the canvas to hold the rest of the site.
   </div>
@@ -7,12 +7,12 @@
 
 <script>
 export default {
-  name: 'canvas',
+  name: 'PageWrapper',
 };
 </script>
 
 <style scoped>
-.canvas {
+.page-wrapper {
   padding: 20px;
 }
 </style>
