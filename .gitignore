@@ -155,5 +155,5 @@ pnpm-debug.log*
 
 
 # flask dev files
-*.flaskenv
+.flaskenv
 *.db
