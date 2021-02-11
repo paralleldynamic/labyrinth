@@ -22,10 +22,10 @@ export default {
   },
   methods: {
     getCards() {
-      const path = 'http://localhost:5000/games';
+      const path = 'http://localhost:5000/game';
       this.axios.get(path)
         .then((res) => {
-          this.cards = res.data.cards;
+          this.cards = res.data.data;
         })
         .catch((error) => {
           // eslint-disable-next-line

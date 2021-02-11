@@ -1,7 +1,4 @@
-from core import app, db
+from core import create_app
+from config import Config
 
-@app.shell_context_processor
-def make_shell_context():
-    return {
-        'db': db,
-    }
+app = create_app(Config)
