@@ -152,7 +152,7 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-
+*.code-workspace
 
 # flask dev files
 .flaskenv
