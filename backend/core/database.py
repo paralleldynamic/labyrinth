@@ -1,3 +1,5 @@
+# import uuid
+
 from .compat import basestring
 from .extensions import db
 
@@ -45,6 +47,7 @@ class PkModel(Model):
 
     __abstract__ = True
     id = Column(db.Integer, primary_key=True)
+    # public_id = Column(db.Integer, default=uuid.uuid4().int)
 
     @classmethod
     def get_by_id(cls, record_id):
@@ -55,8 +58,13 @@ class PkModel(Model):
                 isinstance(record_id, (int, float)),
             )
         ):
+            # return cls.query.get({"public_id": int(record_id)})
             return cls.query.get(int(record_id))
         return None
+
+    @classmethod
+    def get_list(cls, limit=None):
+        return cls.query.all()
 
 
 def reference_col(
