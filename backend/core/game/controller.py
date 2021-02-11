@@ -51,8 +51,6 @@ class GameList(Resource):
             }
             return response_object, 500
 
-        # return save_new_game(data)
-
 @ns.route('/<id>')
 @ns.param('id', 'Unique id of game')
 @ns.response(404, 'Game not found.')
