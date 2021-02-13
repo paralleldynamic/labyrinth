@@ -4,7 +4,7 @@ from sqlalchemy.exc import IntegrityError
 
 from .models import Game as GameDAO
 
-game_dao = GameDAO()
+game_dao = GameDAO
 
 ns = Namespace("game", description="game related operations")
 game = ns.model("game", {
@@ -18,11 +18,11 @@ game = ns.model("game", {
 
 @ns.route('/')
 class GameList(Resource):
-    @ns.doc('list_of_games')
+    @ns.doc('list of all games')
     @ns.marshal_list_with(game, envelope='data')
     def get(self):
         """List of all games."""
-        return GameDAO().get_list()
+        return GameDAO.get_list()
 
     @ns.response(201, 'Game successfully created.')
     @ns.response(500, "Unhandled servor error.")
@@ -32,24 +32,28 @@ class GameList(Resource):
         """Creates a new game."""
         data = request.json
         try:
-            game = game_dao.create(**data)
+            game = GameDAO.create(**data)
             response_object = {
                 'status': "success",
                 "messages": f"Successfully created game { game.title }.",
             }
-            return response_object, 201
+            response_code = 201
         except IntegrityError as e:
             response_object = {
                 "status": "fail",
                 "message": "Game already exists."
             }
-            return response_object, 409
+            response_code = 409
+            raise e
         except Exception as e:
             response_object = {
                 "status": "fail",
                 "message": "There was an unspecified error."
             }
-            return response_object, 500
+            response_code = 500
+            raise e
+        finally:
+            return response_object, response_code
 
 @ns.route('/<id>')
 @ns.param('id', 'Unique id of game')
@@ -59,7 +63,7 @@ class Game(Resource):
     @ns.marshal_with(game)
     def get(self, id):
         """Get a game from the database given its public ID."""
-        game = game_dao.get_by_id(id)
+        game = GameDAO.get_by_id(id)
         if not game:
             ns.abort(404)
         else:
@@ -70,7 +74,7 @@ class Game(Resource):
     @ns.marshal_with(game)
     def delete(self, id):
         """Delete a game from the database using its title."""
-        game = game_dao.get_by_id(id)
+        game = GameDAO.get_by_id(id)
         # TODO better error handling -- e.g. if the game doesn't exist already
         if not game:
             ns.abort(404)
@@ -90,7 +94,7 @@ class Game(Resource):
     @ns.marshal_with(game)
     def get(self, title):
         """Get a game from the database given its title."""
-        game = game_dao.get_by_title(title)
+        game = GameDAO.get_by_title(title)
         if not game:
             ns.abort(404)
         else:
@@ -101,7 +105,7 @@ class Game(Resource):
     @ns.marshal_with(game)
     def delete(self, title):
         """Delete a game from the database using its title."""
-        game = game_dao.get_by_title(title)
+        game = GameDAO.get_by_title(title)
         # TODO better error handling -- e.g. if the game doesn't exist already
         if not game:
             ns.abort(404)
