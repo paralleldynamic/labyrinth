@@ -44,6 +44,7 @@ def register_extensions(app:Flask) -> None:
 def register_blueprints(app):
     """Register Flask blueprints."""
     app.register_blueprint(game.blueprint)
+    app.register_blueprint(user.blueprint)
     return None
 
 
