@@ -23,12 +23,12 @@ class User(PkModel):
     username = Column(db.String(80), unique=True, nullable=False)
     email = Column(db.String(254), unique=True, nullable=False)
     # password is stored as a hashed value
-    password = Column(db.LargeBinary(128), nullable=True)
+    password = Column(db.LargeBinary(128), nullable=False)
     first_name = Column(db.String(), nullable=True)
     last_name = Column(db.String(), nullable=True)
     active = Column(db.Boolean(), default=False)
 
-    def __init__(self, username, email, password=None, **kwargs):
+    def __init__(self, username, email, password, **kwargs):
         """Constructor"""
         super().__init__(username=username, email=email, **kwargs)
         if password:
@@ -43,6 +43,10 @@ class User(PkModel):
     def check_password(self, value):
         """Check password"""
         return bcrypt.check_password_hash(self.password, value)
+
+    @classmethod
+    def get_by_username(cls, search):
+        return cls.query.filter_by(username = search).first()
 
     @property
     def full_name(self):
