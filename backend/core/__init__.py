@@ -10,8 +10,7 @@ from core.extensions import (
     db,
     migrate,
 )
-import core.game as game
-import core.user as user
+from core.apis.v1 import api
 
 
 def create_app(config_object:object) -> Flask:
@@ -45,8 +44,7 @@ def register_extensions(app:Flask) -> None:
 
 def register_blueprints(app):
     """Register Flask blueprints."""
-    app.register_blueprint(game.blueprint)
-    app.register_blueprint(user.blueprint)
+    app.register_blueprint(api.blueprint)
     return None
 
 
