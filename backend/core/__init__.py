@@ -6,6 +6,7 @@ from flask import Flask, render_template
 from core.extensions import (
     bcrypt,
     cors,
+    jwt,
     db,
     migrate,
 )
@@ -36,6 +37,7 @@ def register_extensions(app:Flask) -> None:
     """
     bcrypt.init_app(app)
     cors.init_app(app)
+    jwt.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
     return None
