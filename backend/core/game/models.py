@@ -16,10 +16,6 @@ class Game(PkModel):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    # @classmethod
-    # def get_by_id(cls, id):
-    #     return cls.query.filter_by(public_id=id).first_or_404()
-
     @classmethod
     def get_by_title(cls, search):
         return cls.query.filter(cls.title.ilike(search)).first_or_404()
