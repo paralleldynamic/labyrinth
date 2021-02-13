@@ -1,6 +1,6 @@
 from flask import request
 from flask_restx import Namespace, Resource, fields
-from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+from sqlalchemy.exc import IntegrityError
 
 from .models import Game as GameDAO
 
@@ -8,7 +8,7 @@ game_dao = GameDAO()
 
 ns = Namespace("game", description="game related operations")
 game = ns.model("game", {
-    "id": fields.String(description="public ID of game"),
+    "id": fields.String(description="public ID of the game"),
     "title": fields.String(required=True, description="game title"),
     "publisher_website": fields.String(description="website of publisher of the game"),
     "logo_img_src": fields.String(description="source for the game's logo"),
