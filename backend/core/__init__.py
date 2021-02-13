@@ -4,11 +4,13 @@ import sys
 from flask import Flask, render_template
 
 from core.extensions import (
+    bcrypt,
     cors,
     db,
     migrate,
 )
 import core.game as game
+import core.user as user
 
 
 def create_app(config_object:object) -> Flask:
@@ -28,7 +30,11 @@ def create_app(config_object:object) -> Flask:
 
 
 def register_extensions(app:Flask) -> None:
-    """Register FLask extensions."""
+    """Register Flask extensions imported from the extensions module.
+
+    :param app: the Flask app for which the extensions will be registered.
+    """
+    bcrypt.init_app(app)
     cors.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
