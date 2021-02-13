@@ -40,6 +40,15 @@ class Model(CRUDMixin, db.Model):
     """Base model class that includes CRUD convenience methods."""
 
     __abstract__ = True
+    created_at = Column(
+        db.DateTime,
+        server_default=db.func.now(),
+    )
+    updated_at = Column(
+        db.DateTime,
+        server_default=db.func.now(),
+        onupdate=db.func.now(),
+    )
 
 
 class PkModel(Model):
