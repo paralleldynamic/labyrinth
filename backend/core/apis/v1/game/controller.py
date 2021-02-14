@@ -1,4 +1,5 @@
 from flask import request
+from flask_jwt_extended import jwt_required
 from flask_restx import Namespace, Resource, fields
 from sqlalchemy.exc import IntegrityError
 
@@ -17,9 +18,11 @@ game = ns.model("game", {
 })
 
 @ns.route('/')
+@ns.route('/games')
 class GameList(Resource):
     @ns.doc('list of all games')
     @ns.marshal_list_with(game, envelope='data')
+    @jwt_required
     def get(self):
         """List of all games."""
         return GameDAO.get_list()
@@ -28,6 +31,7 @@ class GameList(Resource):
     @ns.response(500, "Unhandled servor error.")
     @ns.doc('create a new game')
     @ns.expect(game, Validate=True)
+    @jwt_required
     def post(self):
         """Creates a new game."""
         data = request.json
@@ -61,6 +65,7 @@ class GameList(Resource):
 class Game(Resource):
     @ns.doc('Get a game by public ID.')
     @ns.marshal_with(game)
+    @jwt_required
     def get(self, id):
         """Get a game from the database given its public ID."""
         game = GameDAO.get_by_id(id)
@@ -71,7 +76,7 @@ class Game(Resource):
 
     @ns.response(200, "Game successfully deleted.")
     @ns.doc("Delete a game using the title as a reference. This endpoint is not case sensitive.")
-    @ns.marshal_with(game)
+    @jwt_required
     def delete(self, id):
         """Delete a game from the database using its title."""
         game = GameDAO.get_by_id(id)
@@ -92,6 +97,7 @@ class Game(Resource):
 class Game(Resource):
     @ns.doc('Get a game by title. This endpoint is not case sensitive.')
     @ns.marshal_with(game)
+    @jwt_required
     def get(self, title):
         """Get a game from the database given its title."""
         game = GameDAO.get_by_title(title)
@@ -102,7 +108,7 @@ class Game(Resource):
 
     @ns.response(200, "Game successfully deleted.")
     @ns.doc("Delete a game using the title as a reference. This endpoint is not case sensitive.")
-    @ns.marshal_with(game)
+    @jwt_required
     def delete(self, title):
         """Delete a game from the database using its title."""
         game = GameDAO.get_by_title(title)
