@@ -40,7 +40,12 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {},
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   },
   "browserslist": [
     "> 1%",
