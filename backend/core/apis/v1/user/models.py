@@ -55,4 +55,4 @@ class User(PkModel):
 
     def __repr__(self):
         """Represents instance as a unique string."""
-        return f"<Role({self.name})>"
+        return f"<User({self.username})>"
