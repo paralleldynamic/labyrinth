@@ -1,21 +1,10 @@
 from flask import request
 from flask_jwt_extended import jwt_required
-from flask_restx import Namespace, Resource, fields
+from flask_restx import Resource
 from sqlalchemy.exc import IntegrityError
 
+from .contracts import ns, game
 from .models import Game as GameDAO
-
-game_dao = GameDAO
-
-ns = Namespace("game", description="game related operations")
-game = ns.model("game", {
-    "id": fields.String(description="public ID of the game"),
-    "title": fields.String(required=True, description="game title"),
-    "publisher_website": fields.String(description="website of publisher of the game"),
-    "logo_img_src": fields.String(description="source for the game's logo"),
-    "logo_img_alt": fields.String(description="alt text for the "),
-    "tagline": fields.String(description="tagline to describe the game"),
-})
 
 @ns.route('/')
 @ns.route('/games')
@@ -91,7 +80,7 @@ class Game(Resource):
             }
             return response_object, 200
 
-@ns.route('/<title>')
+@ns.route('/title/<title>')
 @ns.param('title', 'Unique title of game')
 @ns.response(404, 'Game not found.')
 class Game(Resource):

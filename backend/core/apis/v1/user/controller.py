@@ -1,25 +1,18 @@
-from typing import final
 from flask import request
 from flask_jwt_extended import create_access_token
-from flask_restx import Namespace, Resource, fields
+from flask_restx import Resource
 from sqlalchemy.exc import IntegrityError
 
+from .contracts import ns, authorization, credentials
 from .models import User as UserDAO
-
-ns = Namespace("user", description="user related operations")
-user = ns.model("", {
-    "id": fields.String(description="public ID of the user"),
-    "username": fields.String(description="unique, user-selected handle"),
-    "email": fields.String(description="user's email address"),
-    "password": fields.String(description="user password"),
-})
 
 @ns.route('/login')
 class Login(Resource):
     @ns.doc('login a user')
-    @ns.marshal_list_with(user, envelope='data')
-    @ns.expect(user, Validate=True)
-    def post():
+    @ns.expect(credentials, Validate=True)
+    @ns.marshal_with(authorization, skip_none=True)
+    def post(self):
+        """Attempts to login a user"""
         data = request.json
         username = data.get('username', None)
         password = data.get('password', None)
@@ -58,8 +51,8 @@ class Login(Resource):
 @ns.route('/register')
 class Register(Resource):
     @ns.doc('register a new user')
-    @ns.marshal_list_with(user, envelope='data')
-    @ns.expect(user, Validate=True)
+    @ns.expect(credentials, Validate=True)
+    @ns.marshal_with(authorization, skip_none=True)
     def post(self):
         """Attempts to register a new user."""
         data = request.json
@@ -73,7 +66,7 @@ class Register(Resource):
             response_code = 400
             return response_object, response_code
         try:
-            user = UserDAO(username, email, password)
+            user = UserDAO.create(username=username, email=email, password=password)
             access_token = create_access_token(identity=user.username)
             response_object = {
                 "status": "success",
@@ -81,12 +74,17 @@ class Register(Resource):
                 "access_token": access_token,
             }
             response_code = 201
+        except IntegrityError as e:
+            response_object = {
+                "status": "fail",
+                "message": "User already exists."
+            }
+            response_code = 409
         except Exception as e:
             response_object = {
                 "status": "fail",
                 "message": "There was an unspecified error."
             }
             response_code = 500
-            raise e
         finally:
             return response_object, response_code
