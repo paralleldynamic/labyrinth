@@ -1,7 +1,7 @@
 import logging
 import sys
 
-from flask import Flask, render_template
+from flask import Flask
 
 from core.extensions import (
     bcrypt,
@@ -44,7 +44,7 @@ def register_extensions(app:Flask) -> None:
 
 def register_blueprints(app):
     """Register Flask blueprints."""
-    app.register_blueprint(api.blueprint)
+    app.register_blueprint(api.blueprint, url_prefix='/api')
     return None
 
 
