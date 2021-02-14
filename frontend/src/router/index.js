@@ -1,43 +1,48 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '@/views/Home.vue';
+import Atrium from '@/views/Atrium.vue';
+import Login from '@/components/Login.vue';
+import Page from '@/components/Page.vue';
+import Register from '@/components/Register.vue';
 
 const routes = [
   {
+    path: '',
+    name: 'Atrium',
+    component: Atrium,
+  },
+  {
     path: '/',
-    name: 'Home',
-    component: Home,
+    component: Page,
+    children: [
+      {
+        path: 'games',
+        name: 'Games',
+        component: () => import('@/views/Games.vue'),
+        auth: true,
+      },
+      {
+        path: 'about',
+        name: 'About',
+        component: () => import('@/views/About.vue'),
+        auth: true,
+      },
+      {
+        path: 'campaigns',
+        name: 'Campaigns',
+        component: () => import('@/views/Campaigns.vue'),
+        auth: true,
+      },
+    ],
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue'),
+    path: '/login',
+    name: 'Login',
+    component: Login,
   },
   {
-    path: '/games',
-    name: 'Games',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import('@/views/Games.vue'),
-  },
-  {
-    path: '/campaigns',
-    name: 'Campaigns',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '@/views/Campaigns.vue'),
-  },
-  {
-    path: '/stories',
-    name: 'Stories',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '@/views/Stories.vue'),
+    path: '/register',
+    name: 'Register',
+    component: Register,
   },
 ];
 

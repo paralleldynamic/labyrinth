@@ -6,11 +6,9 @@
           <h1 id="navbar-title">the labyrinth</h1>
         </div>
         <div id="navbar-menu-items-container">
-          <router-link class="navbar-menu-item" to="/">Homes</router-link>
-          <router-link class="navbar-menu-item" to="/about">About</router-link>
           <router-link class="navbar-menu-item" to="/games">Games</router-link>
           <router-link class="navbar-menu-item" to="/campaigns">Campaigns</router-link>
-          <router-link class="navbar-menu-item" to="/stories">Stories</router-link>
+          <router-link class="navbar-menu-item" to="/about">About</router-link>
         </div>
       </nav>
     </header>
