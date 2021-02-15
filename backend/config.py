@@ -8,3 +8,4 @@ class Config(object):
         'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY') or 'there-really-are-a-lot-of-these'
+    CORS_ORIGINS = ['http://localhost:8080']
