@@ -5,18 +5,18 @@
       <div>
         <label for="username" id="login-username-label">username</label>
         <input type="text"
-              name="username"
-              v-model="form.username"
-              id="login-input-username"
-              required />
+               name="username"
+               v-model="form.username"
+               id="login-input-username"
+               required />
       </div>
       <div>
         <label for="password" id="login-password-input">password</label>
-        <input type="text"
-              name="password"
-              v-model="form.password"
-              id="login-input-password"
-              required />
+        <input type="password"
+               name="password"
+               v-model="form.password"
+               id="login-input-password"
+               required />
       </div>
       <button type="submit">Log In</button>
       <p v-if="showError" id="error">Username or Password is incorrect.</p>
@@ -39,14 +39,14 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['LogIn']),
+    ...mapActions(['login']),
     async submit() {
       const User = new FormData();
       User.append('username', this.form.username);
       User.append('password', this.form.password);
       try {
-        await this.LogIn(User);
-        this.$router.push('/games');
+        await this.login(User);
+        await this.$router.push('/games');
         this.showError = false;
       } catch (error) {
         this.showError = true;

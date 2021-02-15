@@ -2,6 +2,7 @@ from flask import request
 from flask_jwt_extended import create_access_token
 from flask_restx import Resource
 from sqlalchemy.exc import IntegrityError
+from pprint import pprint
 
 from .contracts import ns, authorization, credentials
 from .models import User as UserDAO
@@ -13,7 +14,7 @@ class Login(Resource):
     @ns.marshal_with(authorization, skip_none=True)
     def post(self):
         """Attempts to login a user"""
-        form = request.form
+        form = request.form or request.json
         username = form.get('username', None)
         password = form.get('password', None)
         if not (username and password):
@@ -36,6 +37,7 @@ class Login(Resource):
                 "status": "success",
                 "message": "User is authenticated.",
                 "access_token": access_token,
+                "username": username,
             }
             response_code = 200
         except Exception as e:
@@ -44,7 +46,7 @@ class Login(Resource):
                 "message": "There was an unspecified error."
             }
             response_code = 500
-            raise e
+            pprint(e)
         finally:
             return response_object, response_code
 
