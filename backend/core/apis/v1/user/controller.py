@@ -13,9 +13,9 @@ class Login(Resource):
     @ns.marshal_with(authorization, skip_none=True)
     def post(self):
         """Attempts to login a user"""
-        data = request.json
-        username = data.get('username', None)
-        password = data.get('password', None)
+        form = request.form
+        username = form.get('username', None)
+        password = form.get('password', None)
         if not (username and password):
             response_object = {
                 "status": "error",
