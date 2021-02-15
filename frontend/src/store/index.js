@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
 import auth from './modules/auth';
+import games from './modules/games';
 
 export default createStore({
   state: {
@@ -10,6 +11,7 @@ export default createStore({
   },
   modules: {
     auth,
+    games,
   },
   plugins: [
   ],

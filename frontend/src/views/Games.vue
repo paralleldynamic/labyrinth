@@ -1,18 +1,18 @@
 <template>
   <div class='page-wrapper'>
     <div class="card-container">
-      <ContentCard />
+      <ContentCards />
     </div>
   </div>
 </template>
 
 <script>
-import ContentCard from '@/components/ContentCard.vue';
+import ContentCards from '@/components/ContentCards.vue';
 
 export default {
   name: 'Games',
   components: {
-    ContentCard,
+    ContentCards,
   },
 };
 </script>

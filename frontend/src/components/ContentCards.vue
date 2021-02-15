@@ -13,40 +13,35 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
-  name: 'ContentCard',
+  name: 'ContentCards',
   data() {
     return {
       cards: [],
     };
   },
   methods: {
-    getCards() {
-      const path = 'http://localhost:5000/game';
-      this.axios.get(path)
-        .then((res) => {
-          this.cards = res.data.data;
-        })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.error(error);
-        });
-    },
+    ...mapActions(['getGames']),
   },
   created() {
-    this.getCards();
+    const { accessToken } = this.$store.state.auth;
+    this.getGames(accessToken);
+    this.cards = this.$store.state.games.games;
+    // console.log(this.cards);
   },
 };
 </script>
 
 <style scoped>
 .card {
-  box-shadow: 0 5px 10px rgba(0,0,0,0.19);
+  box-shadow: 0 5px 10px #191919;
   border-radius: 3px;
   width: 25%;
   padding: 0.25em;
   margin: 0.5em;
-  background-color: #F2F3F4;
+  background-color: #FBFBFF;
 }
 
 .card-title {
