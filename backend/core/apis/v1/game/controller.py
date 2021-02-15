@@ -7,7 +7,6 @@ from .contracts import ns, game
 from .models import Game as GameDAO
 
 @ns.route('/')
-@ns.route('/games')
 class GameList(Resource):
     @ns.doc('list of all games')
     @ns.marshal_list_with(game, envelope='data')
