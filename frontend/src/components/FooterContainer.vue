@@ -28,13 +28,13 @@ footer {
 }
 
 #footer-container {
-  background-color: #E5E7E9;
+  background-color: #FBFBFF;
   height: var(--footer-container-height);
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  box-shadow: 0 -1px 2px rgba(0,0,0,0.19);
+  box-shadow: 0 -1px 2px #191919;
 }
 
 #search-bar {

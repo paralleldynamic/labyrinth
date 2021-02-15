@@ -31,13 +31,13 @@ header {
 }
 
 #header-container {
-  background-color: #E5E7E9;
+  background-color: #FBFBFF;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: var(--header-container-height);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.19);
+  box-shadow: 0 1px 2px #191919;
 }
 
 #navbar-title {
