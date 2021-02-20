@@ -35,7 +35,7 @@
                 id="register-input-confirm-password"
                 required />
           <p v-if="form.password != form.passwordConfirmation"
-             id="password-match-error">
+             class="error-message">
               <strong><em>Password entries must match.</em></strong>
           </p>
         </div>
@@ -49,6 +49,7 @@
         </div>
       </div>
       <button type="submit">Register</button>
+      <strong><em><p v-if="showError" class="error-message">{{ responseMessage }}</p></em></strong>
     </form>
     <div class='login-form-nav'>
       <router-link class="link-to-login" to="/login">Have an account? Log in.</router-link>
@@ -70,6 +71,7 @@ export default {
         invitationCode: null,
       },
       showError: false,
+      responseMessage: null,
     };
   },
   methods: {
@@ -84,6 +86,8 @@ export default {
         await this.$router.push('/games');
         this.showError = false;
       } catch (error) {
+        // this.responseMessage = error
+        console.log(error);
         this.showError = true;
       }
     },
@@ -135,7 +139,7 @@ input {
   border-radius: 5px;
 }
 
-#password-match-error {
+.error-message {
   font-size: smaller;
   margin: 0;
   padding-left: 2em;
