@@ -20,8 +20,9 @@
                 required />
         </div>
       </div>
-      <button type="submit">Log In</button>
-      <p v-if="showError" id="error">Username or Password is incorrect.</p>
+      <button type="submit">Log In</button>      <strong><em><p v-if="showError"
+                     class="error-message"
+                     id="registration-error">{{ responseMessage }}</p></em></strong>
     </form>
     <div class='login-form-nav'>
       <router-link class="link-to-register" to="/register">Not registered?</router-link>
@@ -41,6 +42,7 @@ export default {
         password: null,
       },
       showError: false,
+      responseMessage: null,
     };
   },
   methods: {
@@ -49,13 +51,14 @@ export default {
       const User = new FormData();
       User.append('username', this.form.username);
       User.append('password', this.form.password);
-      try {
-        await this.login(User);
-        await this.$router.push('/games');
-        this.showError = false;
-      } catch (error) {
-        this.showError = true;
-      }
+      await this.login(User)
+        .then(() => {
+          this.$router.push('/games');
+        })
+        .catch((error) => {
+          this.responseMessage = error.response.data.message;
+          this.showError = true;
+        });
     },
   },
 };
@@ -105,4 +108,17 @@ input {
   border-radius: 5px;
 }
 
+.error-message {
+  font-size: smaller;
+  margin: 0;
+  padding-left: 2em;
+  text-align: left;
+  color: #F03A47;
+}
+
+#registration-error {
+  margin-top: 1em;
+  padding-left: 0;
+  text-align: center;
+}
 </style>
