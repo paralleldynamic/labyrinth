@@ -1,24 +1,39 @@
 <template>
   <div id="header-container">
     <header>
-      <nav id="navbar-menu">
-        <div>
-          <h1 id="navbar-title">the labyrinth</h1>
-        </div>
-        <div id="navbar-menu-items-container">
-          <router-link class="navbar-menu-item" to="/games">Games</router-link>
-          <router-link class="navbar-menu-item" to="/campaigns">Campaigns</router-link>
-          <router-link class="navbar-menu-item" to="/about">About</router-link>
-        </div>
-      </nav>
+      <div class="header-left">
+        <ph-list id="site-menu" :size="20" />
+      </div>
+      <div class="header-center">
+        <nav id="navbar-menu">
+          <div>
+            <h1 id="navbar-title">the labyrinth</h1>
+          </div>
+          <div id="navbar-menu-items-container">
+            <router-link class="navbar-menu-item" to="/games">Games</router-link>
+            <router-link class="navbar-menu-item" to="/campaigns">Campaigns</router-link>
+            <router-link class="navbar-menu-item" to="/about">About</router-link>
+          </div>
+        </nav>
+      </div>
+      <div class="header-right">
+        <ph-user-circle :size="25" />
+      </div>
     </header>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'HeaderContainer',
   components: {
+  },
+  computed: {
+    ...mapGetters(['authenticated']),
+  },
+  methods: {
   },
 };
 </script>
@@ -26,6 +41,7 @@ export default {
 <style scoped>
 header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
 }
@@ -38,6 +54,26 @@ header {
   width: 100%;
   height: var(--header-container-height);
   box-shadow: 0 1px 2px #191919;
+}
+
+.header-left {
+  flex: 1;
+  text-align: left;
+  margin-top: 0.5em;
+  margin-left: 2em;
+  margin-right: -2em;
+}
+
+.header-right {
+  flex: 1;
+  text-align: right;
+  margin-top: 0.5em;
+  margin-left: -2em;
+  margin-right: 2em;
+}
+
+.header-center {
+  flex: 4
 }
 
 #navbar-title {
