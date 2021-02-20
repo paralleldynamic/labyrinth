@@ -14,9 +14,9 @@ class Login(Resource):
     @ns.marshal_with(authorization, skip_none=True)
     def post(self):
         """Attempts to login a user"""
-        form = request.form or request.json
-        username = form.get('username', None)
-        password = form.get('password', None)
+        data = request.form or request.json
+        username = data.get('username', None)
+        password = data.get('password', None)
         if not (username and password):
             response_object = {
                 "status": "error",
@@ -57,13 +57,22 @@ class Register(Resource):
     @ns.marshal_with(authorization, skip_none=True)
     def post(self):
         """Attempts to register a new user."""
-        data = request.json
-        expected_data = ['username', 'email', 'password']
-        username, email, password = (data.get(key, None) for key in expected_data)
-        if not (username and email and password):
+        data = request.form or request.json
+        expected_data = ['username', 'email', 'password', 'invitation_code']
+        username, email, password, invitation_code = (data.get(key, None) for key in expected_data)
+        pprint([username, email, password, invitation_code])
+        if not all([username, email, password]):
             response_object = {
                 "status": "error",
                 "message": "Missing required information to register a new user."
+            }
+            response_code = 400
+            return response_object, response_code
+        # TODO extend invitation codes
+        if invitation_code != "this test invitation lol":
+            response_object = {
+                "status": "error",
+                "message": "Invalid invitation code. Please try again."
             }
             response_code = 400
             return response_object, response_code
@@ -74,12 +83,13 @@ class Register(Resource):
                 "status": "success",
                 "message": "User is registered.",
                 "access_token": access_token,
+                "username": username,
             }
             response_code = 201
         except IntegrityError as e:
             response_object = {
                 "status": "fail",
-                "message": "User already exists."
+                "message": "Username or email already in use."
             }
             response_code = 409
         except Exception as e:

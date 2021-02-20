@@ -19,6 +19,18 @@ const actions = {
   async logout({ commit }) {
     commit('logout');
   },
+  async register({ commit }, Registration) {
+    const promise = axios.post('user/register', Registration);
+
+    promise
+      .then((res) => {
+        const { data } = res;
+        commit('loginUser', data);
+      })
+      .catch((error) => error);
+
+    return promise;
+  },
 };
 
 const mutations = {

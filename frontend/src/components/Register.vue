@@ -1,6 +1,6 @@
 <template>
   <div class="form-container">
-    <form id="login-form" @submit.prevent="submit">
+    <form id="registration-form" @submit.prevent="submit">
       <h1>the labyrinth</h1>
       <div class="input-container">
         <div>
@@ -49,9 +49,11 @@
         </div>
       </div>
       <button type="submit">Register</button>
-      <strong><em><p v-if="showError" class="error-message">{{ responseMessage }}</p></em></strong>
+      <strong><em><p v-if="showError"
+                     class="error-message"
+                     id="registration-error">{{ responseMessage }}</p></em></strong>
     </form>
-    <div class='login-form-nav'>
+    <div class='registration-form-nav'>
       <router-link class="link-to-login" to="/login">Have an account? Log in.</router-link>
     </div>
   </div>
@@ -75,21 +77,22 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(['login', 'register']),
     async submit() {
-      const User = new FormData();
-      User.append('username', this.form.username);
-      User.append('email', this.form.email);
-      User.append('password', this.form.password);
-      try {
-        await this.login(User);
-        await this.$router.push('/games');
-        this.showError = false;
-      } catch (error) {
-        // this.responseMessage = error
-        console.log(error);
-        this.showError = true;
-      }
+      this.responseMessage = null;
+      const Registration = new FormData();
+      Registration.append('username', this.form.username);
+      Registration.append('email', this.form.email);
+      Registration.append('password', this.form.password);
+      Registration.append('invitation_code', this.form.invitationCode);
+      await this.register(Registration)
+        .then(() => {
+          this.$router.push('/games');
+        })
+        .catch((error) => {
+          this.responseMessage = error.response.data.message;
+          this.showError = true;
+        });
     },
   },
 };
@@ -111,7 +114,7 @@ body {
   text-align: center;
 }
 
-.login-form-nav {
+.registration-form-nav {
   margin: 0.5em;
   padding: 1em;
 }
@@ -145,5 +148,11 @@ input {
   padding-left: 2em;
   text-align: left;
   color: #F03A47;
+}
+
+#registration-error {
+  margin-top: 1em;
+  padding-left: 0;
+  text-align: center;
 }
 </style>
