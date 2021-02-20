@@ -5,13 +5,17 @@ const state = {
 };
 
 const getters = {
+  // eslint-disable-next-line
+  gamesPopulated: (state) => !!state.games,
 };
 
 const actions = {
   async getGames({ commit }, accessToken) {
-    const response = await axios.get('game/',
-      { headers: { Authorization: `Bearer ${accessToken}` } });
-    await commit('setGames', response.data);
+    return axios.get('game/', { headers: { Authorization: `Bearer ${accessToken}` } })
+      .then((res) => {
+        const { data } = res;
+        commit('setGames', data);
+      });
   },
 };
 
