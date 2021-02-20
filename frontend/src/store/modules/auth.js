@@ -17,7 +17,7 @@ const actions = {
     await commit('loginUser', response.data);
   },
   async logout({ commit }) {
-    commit('logout', null);
+    commit('logout');
   },
 };
 
