@@ -34,21 +34,24 @@
                 v-model="form.passwordConfirmation"
                 id="register-input-confirm-password"
                 required />
+          <p v-if="form.password != form.passwordConfirmation"
+             id="password-match-error">
+              <strong><em>Password entries must match.</em></strong>
+          </p>
         </div>
         <div>
           <input type="text"
                 name="invitation_code"
                 placeholder="invitation code"
                 v-model="form.invitationCode"
-                id="login-input-password"
+                id="login-input-invitation-code"
                 required />
         </div>
       </div>
-      <button type="submit">Log In</button>
-      <p v-if="showError" id="error">Username or Password is incorrect.</p>
+      <button type="submit">Register</button>
     </form>
     <div class='login-form-nav'>
-      <router-link class="link-to-register" to="/register">Have an account? Log in.</router-link>
+      <router-link class="link-to-login" to="/login">Have an account? Log in.</router-link>
     </div>
   </div>
 </template>
@@ -132,4 +135,11 @@ input {
   border-radius: 5px;
 }
 
+#password-match-error {
+  font-size: smaller;
+  margin: 0;
+  padding-left: 2em;
+  text-align: left;
+  color: #F03A47;
+}
 </style>
