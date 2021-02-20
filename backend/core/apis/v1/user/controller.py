@@ -25,7 +25,7 @@ class Login(Resource):
             response_code = 400
         try:
             user = UserDAO.get_by_username(username)
-            if not user.check_password(password):
+            if not (user and user.check_password(password)):
                 response_object = {
                     "status": "error",
                     "message": "Invalid username or password.",
