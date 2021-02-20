@@ -9,7 +9,7 @@ authorization = ns.model("authorization", {
     "status": fields.String(description="status of authorization request"),
     "message": fields.String(description="detailed explanation of status"),
     "access_token": fields.String(description="a JWT access token that has been authorized for a user"),
-    "username": fields.String(description="username of user who has been logged in")
+    "username": fields.String(description="username of user who has been logged in"),
 })
 
 # an expected credential JSON object for logging in or registering
@@ -20,4 +20,5 @@ credentials = ns.model("credentials", {
     "username": fields.String(description="unique, user-selected handle"),
     "email": fields.String(description="user's email address"),
     "password": fields.String(description="user password"),
+    "invitation_code": fields.String(description="invitation code to register a new account",)
 })
