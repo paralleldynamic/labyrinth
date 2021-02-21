@@ -11,11 +11,16 @@ const getters = {
 
 const actions = {
   async getGames({ commit }, accessToken) {
-    return axios.get('game/', { headers: { Authorization: `Bearer ${accessToken}` } })
+    const promise = axios.get('game/',
+      { headers: { Authorization: `Bearer ${accessToken}` } });
+
+    promise
       .then((res) => {
         const { data } = res;
         commit('setGames', data);
-      });
+      }).catch((error) => error);
+
+    return promise;
   },
 };
 

@@ -24,12 +24,16 @@ export default {
   },
   methods: {
     ...mapActions(['getGames']),
+    async fetchCards() {
+      const { accessToken } = this.$store.state.auth;
+      await this.getGames(accessToken)
+        .then(() => {
+          this.cards = this.$store.state.games.games;
+        }).catch((error) => error);
+    },
   },
   created() {
-    const { accessToken } = this.$store.state.auth;
-    this.getGames(accessToken);
-    this.cards = this.$store.state.games.games;
-    // console.log(this.cards);
+    this.fetchCards();
   },
 };
 </script>
