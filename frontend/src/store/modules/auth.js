@@ -26,8 +26,7 @@ const actions = {
       .then((res) => {
         const { data } = res;
         commit('loginUser', data);
-      })
-      .catch((error) => error);
+      }).catch((error) => error);
 
     return promise;
   },
