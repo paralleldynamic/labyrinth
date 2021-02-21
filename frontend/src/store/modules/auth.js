@@ -13,11 +13,20 @@ const getters = {
 
 const actions = {
   async login({ commit }, User) {
-    const response = await axios.post('user/login', User);
-    await commit('loginUser', response.data);
+    const promise = axios.post('user/login', User);
+
+    promise
+      .then((res) => {
+        const { data } = res;
+        commit('loginUser', data);
+      }).catch((error) => error);
+
+    return promise;
   },
   async logout({ commit }) {
-    commit('logout');
+    if (getters.authenticated) {
+      await commit('logoutUser');
+    }
   },
   async register({ commit }, Registration) {
     const promise = axios.post('user/register', Registration);
@@ -42,7 +51,7 @@ const mutations = {
   // eslint-disable-next-line
   logoutUser(state) {
     state.user = null;
-    state.posts = null;
+    state.accessToken = null;
   },
 };
 

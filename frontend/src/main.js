@@ -3,8 +3,8 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import PhosphorVue from 'phosphor-vue';
 import App from './App.vue';
-import router from './router';
 import store from './store';
+import router from './router';
 
 // TODO: environmentalization?
 // TODO: add unit tests u slacker

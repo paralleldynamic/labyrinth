@@ -17,7 +17,7 @@
         </nav>
       </div>
       <div class="header-right">
-        <ph-user-circle :size="25" />
+        <UserMenu />
       </div>
     </header>
   </div>
@@ -25,10 +25,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import UserMenu from '@/components/UserMenu.vue';
 
 export default {
   name: 'HeaderContainer',
   components: {
+    UserMenu,
   },
   computed: {
     ...mapGetters(['authenticated']),

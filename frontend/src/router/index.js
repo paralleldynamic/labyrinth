@@ -45,6 +45,10 @@ const routes = [
     name: 'Register',
     component: Register,
   },
+  {
+    path: '/logout',
+    redirect: { name: 'Atrium' },
+  },
 ];
 
 const router = createRouter({
@@ -54,6 +58,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
+    console.log(store.getters.authenticated);
     if (store.getters.authenticated) {
       next();
       return;

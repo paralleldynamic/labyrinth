@@ -7,8 +7,17 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'Atrium',
+  // eslint-disable-next-line
+  methods: {
+    ...mapActions(['logout']),
+  },
+  created() {
+    this.logout();
+  },
 };
 </script>
 

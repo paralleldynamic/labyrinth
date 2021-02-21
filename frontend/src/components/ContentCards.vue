@@ -29,7 +29,13 @@ export default {
       await this.getGames(accessToken)
         .then(() => {
           this.cards = this.$store.state.games.games;
-        }).catch((error) => error);
+        })
+        .catch((error) => {
+          if (error.msg === 'Token has expired') {
+            this.$router.push('/login');
+          }
+          return error;
+        });
     },
   },
   created() {
