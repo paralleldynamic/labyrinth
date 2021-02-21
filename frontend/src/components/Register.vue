@@ -44,7 +44,7 @@
                 name="invitation_code"
                 placeholder="invitation code"
                 v-model="form.invitationCode"
-                id="login-input-invitation-code"
+                id="register-input-invitation-code"
                 required />
         </div>
       </div>
@@ -77,7 +77,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['login', 'register']),
+    ...mapActions(['register']),
     async submit() {
       this.responseMessage = null;
       const Registration = new FormData();
