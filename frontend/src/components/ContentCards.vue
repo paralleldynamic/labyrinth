@@ -48,6 +48,7 @@ export default {
 .card {
   box-shadow: 0 5px 10px #191919;
   border-radius: 3px;
+  box-sizing: border-box;
   width: 25%;
   padding: 0.25em;
   margin: 0.5em;
