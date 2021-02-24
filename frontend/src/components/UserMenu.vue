@@ -31,6 +31,7 @@ button {
   right: 2%;
   background-color: #FBFBFF;
   box-shadow: 1px 1px 1px #191919;
+  border: 1px solid #191919;
   min-width: 15%;
   z-index: 1;
 }
@@ -46,7 +47,6 @@ button {
 
 .user-menu:hover .user-menu-dropdown-content {
   display: block;
-  border: 10px;
   border-radius: 1x;
 }
 </style>
