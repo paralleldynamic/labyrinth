@@ -5,7 +5,7 @@
       <h3>a Breviary of Catalogued Portals Into the Unseen Sights of Vivid Imagination</h3>
     </div>
     <div id="game-list-control-container">
-        <button id="add-new-game-button" @click="showAddGameModal = true">
+        <button id="add-game-button" @click="showAddGameModal = true">
           <ph-plus-circle :size="30" />
         </button>
         <button id="refresh-game-list-button" hidden>
@@ -16,7 +16,7 @@
       <ContentCards />
     </div>
     <div class="modal-container">
-      <modal id="add-new-game-form"
+      <add-game-modal id="add-game-form"
              :show="showAddGameModal"
              @close="showAddGameModal = false" />
     </div>
@@ -26,13 +26,13 @@
 <script>
 import { mapActions } from 'vuex';
 import ContentCards from '@/components/ContentCards.vue';
-import Modal from '@/components/Modal.vue';
+import AddGameModal from '@/components/AddGameModal.vue';
 
 export default {
   name: 'Games',
   components: {
     ContentCards,
-    Modal,
+    AddGameModal,
   },
   data() {
     return {
