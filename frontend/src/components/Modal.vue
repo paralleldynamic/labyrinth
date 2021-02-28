@@ -1,8 +1,8 @@
 <template>
   <transition name="modal">
-    <div class="modal-mask">
+    <div class="modal-mask" @click="close" v-if="show">
       <div class="modal-wrapper">
-        <div class="modal-container">
+        <div class="modal-container" @click.stop>
 
           <div class="modal-header">
             <slot name="header">
@@ -19,7 +19,7 @@
           <div class="modal-footer">
             <slot name="footer">
               default footer
-              <button class="modal-default-button" @click="$emit('close')">
+              <button class="modal-default-button" @click="close">
                 OK
               </button>
             </slot>
@@ -33,6 +33,21 @@
 <script>
 export default {
   name: 'Modal',
+  props: [
+    'show',
+  ],
+  mounted() {
+    document.addEventListener('keydown', (e) => {
+      if (this.show && e.code === 'Escape') {
+        this.close();
+      }
+    });
+  },
+  methods: {
+    close() {
+      this.$emit('close');
+    },
+  },
 };
 </script>
 

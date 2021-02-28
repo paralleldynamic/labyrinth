@@ -5,7 +5,7 @@
       <h3>a Breviary of Catalogued Portals Into the Unseen Sights of Vivid Imagination</h3>
     </div>
     <div id="game-list-control-container">
-        <button id="add-new-game-button" @click="showModal = true">
+        <button id="add-new-game-button" @click="showAddGameModal = true">
           <ph-plus-circle :size="30" />
         </button>
         <button id="refresh-game-list-button" hidden>
@@ -16,7 +16,9 @@
       <ContentCards />
     </div>
     <div class="modal-container">
-      <modal v-if="showModal" @close="showModal = false" />
+      <modal id="add-new-game-form"
+             :show="showAddGameModal"
+             @close="showAddGameModal = false" />
     </div>
   </div>
 </template>
@@ -34,7 +36,7 @@ export default {
   },
   data() {
     return {
-      showModal: true,
+      showAddGameModal: false,
     };
   },
   methods: {
