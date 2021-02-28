@@ -37,13 +37,6 @@ class GameList(Resource):
             }
             response_code = 409
             raise e
-        except Exception as e:
-            response_object = {
-                "status": "fail",
-                "message": "There was an unspecified error."
-            }
-            response_code = 500
-            raise e
         finally:
             return response_object, response_code
 
