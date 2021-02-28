@@ -22,7 +22,9 @@ class GameList(Resource):
     @jwt_required
     def post(self):
         """Creates a new game."""
-        data = request.json
+        print(request)
+        data = request.form or request.json
+        print(data)
         try:
             game = GameDAO.create(**data)
             response_object = {
@@ -37,6 +39,12 @@ class GameList(Resource):
             }
             response_code = 409
             raise e
+        # except Exception as e:
+        #     response_object = {
+        #         "status": "fail",
+        #         "message": "Unhandled servor error."
+        #     }
+        #     response_code = 500
         finally:
             return response_object, response_code
 

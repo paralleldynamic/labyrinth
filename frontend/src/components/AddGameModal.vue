@@ -16,29 +16,25 @@
                 name="publisher_website"
                 placeholder="publisher website"
                 v-model="form.publisher_website"
-                id="add-game-input-publisher_website"
-                required />
+                id="add-game-input-publisher_website" />
           <label for="logo_img_src">Logo URL</label>
           <input type="text"
                 name="logo_img_src"
                 placeholder="URL for game logo"
                 v-model="form.logo_img_src"
-                id="add-game-input-logo_img_src"
-                required />
+                id="add-game-input-logo_img_src" />
           <label for="logo_img_alt">Logo Alt Text</label>
           <input type="text"
                 name="logo_img_alt"
                 placeholder="alt text description for logo"
                 v-model="form.logo_img_alt"
-                id="add-game-input-logo_img_alt"
-                required />
+                id="add-game-input-logo_img_alt" />
           <label for="tagline">Game Tagline</label>
           <input type="text"
                 name="tagline"
                 placeholder="tagline"
                 v-model="form.tagline"
-                id="add-game-input-tagline"
-                required />
+                id="add-game-input-tagline" />
         <button type="submit">submit</button>
         </div>
       </form>
@@ -47,6 +43,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import Modal from './Modal.vue';
 
 export default {
@@ -66,12 +63,27 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['postGame']),
     close() {
       const f = this.form;
       Object.keys(f).forEach((k) => {
         f[k] = null;
       });
       this.$emit('close');
+    },
+    async submit() {
+      const { accessToken } = this.$store.state.auth;
+      const Game = new FormData();
+      const f = this.form;
+      Object.keys(f).forEach((k) => {
+        if (f[k]) {
+          Game.append(k, f[k]);
+        }
+      });
+      await this.postGame({ Game, accessToken })
+        .then(this.close())
+        // .then((res) => console.log(res))
+        .catch((error) => console.log(error));
     },
   },
 };
