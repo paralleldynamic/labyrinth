@@ -1,0 +1,43 @@
+# Decent Primary Color set
+031926    Rich Black FOGRA 29
+FDFDFF    White
+007FFF    Azure
+FFFC31    Maximum Yellow
+23CE6B    Emerald
+
+
+# This is recreating what I lost I think
+080F0F    Rich Black FOGRA 39
+FBFBFF    Ghost White
+119DA4    Viridian Green
+D0E562    June Bud
+7D70BA    Middle Blue Purple
+FBAF00    Honey Yellow
+
+
+# I kind of like this but idk what do you think
+191919    Eerie Black
+FFFFFF    White
+E6E8E6    Platinum
+0496FF    Dodger Blue
+  # Any of these might finish the set
+  9D44B5    Purpureus
+  0081AF    CG Blue
+  077187    Teal Blue
+  6F2DBD    French Violet
+  037171    Skobeloff
+  1B998B    Persian Green
+
+
+
+
+#
+191919    eerie black
+FBFBFF    ghost white
+3185FC    azure
+28AFB0    verdigris
+F03A47    red salsa
+
+
+# Random other colors
+040F16    Also Rich Black FOGRA 29??? but truer black
