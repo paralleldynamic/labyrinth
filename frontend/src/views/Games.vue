@@ -5,13 +5,18 @@
       <h3>a Breviary of Catalogued Portals Into the Unseen Sights of Vivid Imagination</h3>
     </div>
     <div id="game-list-control-container">
-        <button id="add-new-game-button"><ph-plus-circle :size="30" /></button>
-        <button id="refresh-game-list-button">
-          <ph-arrow-counter-clockwise :size="30" />
+        <button id="add-new-game-button" @click="showModal = true">
+          <ph-plus-circle :size="30" />
+        </button>
+        <button id="refresh-game-list-button" hidden>
+          <ph-arrow-counter-clockwise :size="30"/>
         </button>
     </div>
     <div class="card-container">
       <ContentCards />
+    </div>
+    <div class="modal-container">
+      <modal v-if="showModal" @close="showModal = false" />
     </div>
   </div>
 </template>
@@ -19,11 +24,18 @@
 <script>
 import { mapActions } from 'vuex';
 import ContentCards from '@/components/ContentCards.vue';
+import Modal from '@/components/Modal.vue';
 
 export default {
   name: 'Games',
   components: {
     ContentCards,
+    Modal,
+  },
+  data() {
+    return {
+      showModal: true,
+    };
   },
   methods: {
     ...mapActions(['refreshGames', 'createGame']),
