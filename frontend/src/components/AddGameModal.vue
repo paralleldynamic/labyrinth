@@ -69,7 +69,7 @@ export default {
       Object.keys(f).forEach((k) => {
         f[k] = null;
       });
-      this.$emit('close');
+      this.$emit('closeModal');
     },
     async submit() {
       const { accessToken } = this.$store.state.auth;
