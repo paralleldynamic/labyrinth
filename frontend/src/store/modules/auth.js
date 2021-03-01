@@ -1,3 +1,5 @@
+/* eslint no-shadow: ["error", { "allow": ["state"] }] */
+
 import axios from 'axios';
 
 const state = {
@@ -7,7 +9,6 @@ const state = {
 };
 
 const getters = {
-  // eslint-disable-next-line
   authenticated: (state) => !!state.username && !!state.accessToken,
 };
 
@@ -43,12 +44,10 @@ const actions = {
 
 const mutations = {
   // TODO: refactor functions so they aren't "shadowing" global variable state
-  // eslint-disable-next-line
   loginUser(state, data) {
     state.username = data.username;
     state.accessToken = data.access_token;
   },
-  // eslint-disable-next-line
   logoutUser(state) {
     state.user = null;
     state.accessToken = null;
