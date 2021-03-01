@@ -74,25 +74,17 @@ header {
   margin-right: 2em;
 }
 
-.header-center {
-  flex: 4
-}
-
 #navbar-title {
   margin: 0.25em;
   margin-bottom: 0.4em;
-
   text-transform: lowercase;
 }
+
 #navbar-menu {
   display: block;
   font-size: small;
   text-transform: lowercase;
   text-align: center;
-}
-
-#navbar-menu-items-container {
-
 }
 
 .navbar-menu-item {

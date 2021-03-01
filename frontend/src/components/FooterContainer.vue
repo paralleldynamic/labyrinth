@@ -4,12 +4,6 @@
       <div id="copyright-info-container">
         <p id="copyright-notice">© Patrick Spears 2021</p>
       </div>
-      <!-- search functionality is not yet enabled>
-      <div id="search-bar">
-        <input id="search-input" type="search" name="search-key" placeholder="enter search term">
-        <button id="search-submit">search</button>
-      </div>
-      <-->
     </footer>
   </div>
 </template>
@@ -21,12 +15,6 @@ export default {
 </script>
 
 <style scoped>
-footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-
-}
-
 #footer-container {
   background-color: #FBFBFF;
   height: var(--footer-container-height);
@@ -35,13 +23,6 @@ footer {
   left: 0;
   width: 100%;
   box-shadow: 0 -1px 2px #191919;
-}
-
-#search-bar {
-  margin-top: 0.75em;
-  margin-right: 0.75em;
-  font-size: smaller;
-  text-align: right;
 }
 
 #copyright-notice {

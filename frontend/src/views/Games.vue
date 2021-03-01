@@ -104,15 +104,12 @@ export default {
 }
 
 .game-list-control-container {
-  /* position: absolute;
-  right: 1.5em;
-  top: calc(var(--header-container-height) + 1.5em); */
   display: flex;
   align-items: left;
   width: min-content;
 }
 
-.game-list-control-container button {
+.game-list-control-container > button {
   margin: 5px;
   background-color: transparent;
   border: none;

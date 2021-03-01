@@ -1,9 +1,8 @@
 <template>
   <transition name="slide">
     <div class="sidebar-mask" @click="toggleSidebar" v-if="show">
-      <div v-if="show"
-          @click.stop
-          class="sidebar-panel">
+      <div @click.stop
+           class="sidebar-panel">
         <slot />
       </div>
     </div>
@@ -29,15 +28,15 @@ export default {
 
 <style scoped>
 .sidebar-mask {
-  width: 50vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: grid;
 }
 
 .sidebar-panel {
   width: 100%;
   height: 100%;
-  /* border: 3px solid #191919; */
+  min-width: 100%;
   background-color: #FBFBFF;
   box-shadow: 0 2px 4px #191919;
 }
