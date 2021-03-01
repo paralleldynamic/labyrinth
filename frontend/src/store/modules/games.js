@@ -23,7 +23,6 @@ const actions = {
     return promise;
   },
   async postGame({ commit }, { Game, accessToken }) {
-    console.log('made it to function');
     const promise = axios.post('game/',
       Game,
       { headers: { Authorization: `Bearer ${accessToken}` } });
@@ -35,6 +34,20 @@ const actions = {
       }).catch((error) => error);
 
     return promise;
+  },
+  /* eslint-disable-next-line */
+  async deleteGame({ commit }, { id, accessToken }) {
+    const endpoint = `game/${id}`;
+    const promise = axios.delete(endpoint,
+      { headers: { Authorization: `Bearer ${accessToken}` } });
+
+    promise
+      // .then((res) => {
+      // const { data } = res;
+      // TODO: implement deleteGame
+      // commit('deleteGame', data);
+      // })
+      .catch((error) => error);
   },
 };
 
@@ -49,6 +62,9 @@ const mutations = {
     state.games.push(data);
     console.log('after: ' && state.games);
   },
+  // deleteGame(state, data) {
+
+  // },
 };
 
 export default {

@@ -15,15 +15,17 @@
     </div>
     </div>
     <div class="game-list-body">
-      <ContentCards @cardClicked="showGameDetailSidebar = !showGameDetailSidebar" />
+      <ContentCards @cardClicked="toggleSidebar" />
     </div>
   </div>
   <div class="game-list-modal-container">
     <add-game-modal :show="showAddGameModal"
-                    @close="showAddGameModal = false" />
+                    @closeModal="showAddGameModal = false" />
   </div>
   <div class="game-list-sidebar-container">
-    <sidebar :show="showGameDetailSidebar" />
+    <GameDetailSidebar :show="showGameDetailSidebar"
+             @toggleSidebar="toggleSidebar"
+             :card="activeCard" />
   </div>
 </template>
 
@@ -31,23 +33,35 @@
 import { mapActions } from 'vuex';
 import ContentCards from '@/components/ContentCards.vue';
 import AddGameModal from '@/components/AddGameModal.vue';
-import Sidebar from '@/components/Sidebar.vue';
+import GameDetailSidebar from '@/components/GameDetailSidebar.vue';
 
 export default {
   name: 'Games',
   components: {
     ContentCards,
     AddGameModal,
-    Sidebar,
+    GameDetailSidebar,
   },
   data() {
     return {
       showAddGameModal: false,
       showGameDetailSidebar: false,
+      activeCard: null,
     };
   },
   methods: {
     ...mapActions(['refreshGames', 'createGame']),
+    toggleSidebar(card) {
+      if (!this.activeCard) {
+        this.activeCard = card;
+        this.showGameDetailSidebar = !this.showGameDetailSidebar;
+      } else if (card.id !== this.activeCard.id) {
+        this.activeCard = card;
+        if (!this.showGameDetailSidebar) { this.showGameDetailSidebar = true; }
+      } else if (card.id === this.activeCard.id) {
+        this.showGameDetailSidebar = !this.showGameDetailSidebar;
+      }
+    },
   },
 };
 </script>

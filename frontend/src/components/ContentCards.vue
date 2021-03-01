@@ -1,7 +1,7 @@
 <template>
   <div class="card" v-for="card in cards"
                     v-bind:key="card"
-                    @click="cardClicked">
+                    @click="cardClicked(card)">
     <div class="card-header">
       <a v-bind:href="card.website">
         <img class="card-logo" v-bind:src="card.logo_img_src"
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       cards: [],
+      activeCard: null,
     };
   },
   emits: [
@@ -42,8 +43,9 @@ export default {
           return error;
         });
     },
-    cardClicked() {
-      this.$emit('cardClicked');
+    cardClicked(card) {
+      this.activeCard = card;
+      this.$emit('cardClicked', this.activeCard);
     },
   },
   created() {

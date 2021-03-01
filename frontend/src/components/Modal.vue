@@ -1,6 +1,6 @@
 <template>
   <transition name="modal">
-    <div class="modal-mask" @click="close" v-if="show">
+    <div class="modal-mask" @click="closeModal" v-if="show">
       <div class="modal-wrapper">
         <div class="modal-container" @click.stop>
           <slot />
@@ -19,13 +19,13 @@ export default {
   mounted() {
     document.addEventListener('keydown', (e) => {
       if (this.show && e.code === 'Escape') {
-        this.close();
+        this.closeModal();
       }
     });
   },
   methods: {
-    close() {
-      this.$emit('close');
+    closeModal() {
+      this.$emit('closeModal');
     },
   },
 };

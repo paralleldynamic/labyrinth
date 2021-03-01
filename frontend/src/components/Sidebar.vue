@@ -1,8 +1,11 @@
 <template>
   <transition name="slide">
-    <div v-if="show"
+    <div class="sidebar-mask" @click="toggleSidebar" v-if="show">
+      <div v-if="show"
+          @click.stop
           class="sidebar-panel">
-          <h3>Test Title lol</h3>
+        <slot />
+      </div>
     </div>
   </transition>
 </template>
@@ -13,15 +16,29 @@ export default {
   props: [
     'show',
   ],
+  emit: [
+    'toggleSidebar',
+  ],
   methods: {
+    toggleSidebar() {
+      this.$emit('toggleSidebar');
+    },
   },
 };
 </script>
 
 <style scoped>
-.sidebar-panel {
+.sidebar-mask {
   width: 50vw;
   height: 100vh;
-  border: 3px solid #191919;
+  display: grid;
+}
+
+.sidebar-panel {
+  width: 100%;
+  height: 100%;
+  /* border: 3px solid #191919; */
+  background-color: #FBFBFF;
+  box-shadow: 0 2px 4px #191919;
 }
 </style>
