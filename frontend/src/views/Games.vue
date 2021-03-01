@@ -1,10 +1,11 @@
 <template>
   <div class="game-list-container">
-    <div class="header-title">
-      <h2>P Alexander's Compendium of the Marvellous and Fantastic</h2>
-      <h3>a Breviary of Catalogued Portals Into the Unseen Sights of Vivid Imagination</h3>
-    </div>
-    <div id="game-list-control-container">
+    <div class="game-list-header">
+      <div class="game-list-title">
+        <h2>P Alexander's Compendium of the Marvellous and Fantastic</h2>
+        <h3>a Breviary of Catalogued Portals Into the Unseen Sights of Vivid Imagination</h3>
+      </div>
+      <div class="game-list-control-container">
         <button id="add-game-button" @click="showAddGameModal = true">
           <ph-plus-circle :size="30" />
         </button>
@@ -12,15 +13,16 @@
           <ph-arrow-counter-clockwise :size="30"/>
         </button>
     </div>
-    <div class="card-container">
+    </div>
+    <div class="game-list-body">
       <ContentCards @cardClicked="showGameDetailSidebar = !showGameDetailSidebar" />
     </div>
-    <div class="modal-container">
-      <add-game-modal :show="showAddGameModal"
-                      @close="showAddGameModal = false" />
-    </div>
   </div>
-  <div class="game-detail-sidebar-container">
+  <div class="game-list-modal-container">
+    <add-game-modal :show="showAddGameModal"
+                    @close="showAddGameModal = false" />
+  </div>
+  <div class="game-list-sidebar-container">
     <sidebar :show="showGameDetailSidebar" />
   </div>
 </template>
@@ -52,24 +54,31 @@ export default {
 
 <style scoped>
 .game-list-container {
-  margin: auto;
   display: flex;
+  height: 100%;
   justify-content: space-evenly;
   flex-wrap: wrap;
+}
+
+.game-list-header {
+  display: grid;
+  grid-template-columns: auto min-content;
   width: 100%;
 }
 
-.header-title {
-  margin: 0 0 1em 0;
+.game-list-title {
 }
 
-#game-list-control-container {
-  position: absolute;
+.game-list-control-container {
+  /* position: absolute;
   right: 1.5em;
-  top: calc(var(--header-container-height) + 1.5em);
+  top: calc(var(--header-container-height) + 1.5em); */
+  display: flex;
+  align-items: left;
+  width: min-content;
 }
 
-#game-list-control-container button {
+.game-list-control-container button {
   margin: 5px;
   background-color: transparent;
   border: none;
@@ -87,12 +96,11 @@ h3 {
   font-size: smaller;
 }
 
-.card-container {
+.game-list-body {
   display: flex;
-  align-items: space-between;
+  height: min-content;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  grid-template-columns: repeat(autofill, 1fr);
   grid-auto-rows: auto;
 }
 </style>

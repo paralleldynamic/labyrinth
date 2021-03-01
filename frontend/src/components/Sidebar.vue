@@ -19,15 +19,9 @@ export default {
 </script>
 
 <style scoped>
-.slide-enter-active,
-.slide-leave-active
-{
-    transition: transform 0.2s ease;
-}
-
-.slide-enter,
-.slide-leave-to {
-    transform: translateX(-100%);
-    transition: all 150ms ease-in 0s
+.sidebar-panel {
+  width: 50vw;
+  height: 100vh;
+  border: 3px solid #191919;
 }
 </style>
