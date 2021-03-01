@@ -14,8 +14,11 @@
         </button>
     </div>
     </div>
-    <div class="game-list-body">
-      <ContentCards @cardClicked="toggleSidebar" />
+    <div class="game-list-body" v-if="!!games" >
+      <GameCard v-for="game in games"
+                :key="game"
+                :game="game"
+                @cardClicked="toggleSidebar" />
     </div>
   </div>
   <div class="game-list-modal-container">
@@ -31,14 +34,14 @@
 
 <script>
 import { mapActions } from 'vuex';
-import ContentCards from '@/components/ContentCards.vue';
+import GameCard from '@/components/GameCard.vue';
 import AddGameModal from '@/components/AddGameModal.vue';
 import GameDetailSidebar from '@/components/GameDetailSidebar.vue';
 
 export default {
   name: 'Games',
   components: {
-    ContentCards,
+    GameCard,
     AddGameModal,
     GameDetailSidebar,
   },
@@ -49,8 +52,13 @@ export default {
       activeCard: null,
     };
   },
+  computed: {
+    games() {
+      return this.$store.state.games.games;
+    },
+  },
   methods: {
-    ...mapActions(['refreshGames', 'createGame']),
+    ...mapActions(['refreshGames', 'createGame', 'getGames']),
     toggleSidebar(card) {
       if (!this.activeCard) {
         this.activeCard = card;
@@ -62,6 +70,19 @@ export default {
         this.showGameDetailSidebar = !this.showGameDetailSidebar;
       }
     },
+    async fetchGames() {
+      const { accessToken } = this.$store.state.auth;
+      this.getGames(accessToken)
+        .catch((error) => {
+          if (error.msg === 'Token has expired') {
+            this.$router.push('/login');
+          }
+          return error;
+        });
+    },
+  },
+  created() {
+    this.fetchGames();
   },
 };
 </script>
@@ -78,9 +99,6 @@ export default {
   display: grid;
   grid-template-columns: auto min-content;
   width: 100%;
-}
-
-.game-list-title {
 }
 
 .game-list-control-container {
