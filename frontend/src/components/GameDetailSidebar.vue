@@ -1,8 +1,8 @@
 <template>
   <sidebar :show="show" @toggleSidebar="toggleSidebar">
     <div class="sidebar-content">
-      <h1>{{ card.title }}</h1>
-      <p>{{ card.tagline }}</p>
+      <h1>{{ game.title }}</h1>
+      <p>{{ game.tagline }}</p>
       <button @click="submitDelete">Delete This Game</button>
     </div>
   </sidebar>
@@ -19,20 +19,22 @@ export default {
   },
   props: [
     'show',
-    'card',
+    'game',
   ],
   emit: [
     'toggleSidebar',
   ],
   methods: {
     ...mapActions(['deleteGame']),
-    toggleSidebar() {
-      this.$emit('toggleSidebar');
+    toggleSidebar(game) {
+      this.$emit('toggleSidebar', game);
     },
-    submitDelete() {
-      const { id } = this.card;
+    async submitDelete() {
+      const { id } = this.game;
       const { accessToken } = this.$store.state.auth;
-      this.deleteGame({ id, accessToken });
+      await this.deleteGame({ id, accessToken })
+        .then(this.toggleSidebar(this.game))
+        .catch((error) => error);
     },
   },
 };

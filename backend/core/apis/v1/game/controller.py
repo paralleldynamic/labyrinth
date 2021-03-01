@@ -1,6 +1,6 @@
 from flask import request
 from flask_jwt_extended import jwt_required
-from flask_restx import Resource
+from flask_restx import Resource, marshal
 from sqlalchemy.exc import IntegrityError
 
 from .contracts import ns, game
@@ -24,10 +24,11 @@ class GameList(Resource):
         """Creates a new game."""
         data = request.form or request.json
         try:
-            game = GameDAO.create(**data)
+            created_game = GameDAO.create(**data)
             response_object = {
-                'status': "success",
-                "messages": f"Successfully created game { game.title }.",
+                "status": "success",
+                "messages": f"Successfully created game { created_game.title }.",
+                "game": marshal(created_game, game),
             }
             response_code = 201
         except IntegrityError as e:
@@ -43,6 +44,8 @@ class GameList(Resource):
                 "message": "Unhandled servor error."
             }
             response_code = 500
+            print(e)
+            raise e
         finally:
             return response_object, response_code
 

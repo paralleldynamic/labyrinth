@@ -1,3 +1,5 @@
+/* eslint no-shadow: ["error", { "allow": ["state"] }] */
+
 import axios from 'axios';
 
 const state = {
@@ -5,12 +7,13 @@ const state = {
 };
 
 const getters = {
-  // eslint-disable-next-line
   gamesPopulated: (state) => !!state.games,
 };
 
 const actions = {
   async getGames({ commit }, accessToken) {
+    if (state.games) { state.games = null; }
+
     const promise = axios.get('game/',
       { headers: { Authorization: `Bearer ${accessToken}` } });
 
@@ -29,8 +32,8 @@ const actions = {
 
     promise
       .then((res) => {
-        const { data } = res;
-        commit('addGame', data);
+        const { game } = res.data;
+        commit('addGame', game);
       }).catch((error) => error);
 
     return promise;
@@ -42,29 +45,22 @@ const actions = {
       { headers: { Authorization: `Bearer ${accessToken}` } });
 
     promise
-      // .then((res) => {
-      // const { data } = res;
-      // TODO: implement deleteGame
-      // commit('deleteGame', data);
-      // })
+      .then(commit('deleteGame', id))
       .catch((error) => error);
+    commit('deleteGame', id);
   },
 };
 
 const mutations = {
-  /* eslint-disable-next-line */
   setGames(state, data) {
     state.games = data;
   },
-  /* eslint-disable-next-line */
-  addGame(state, data) {
-    console.log('before: ' && state.games);
-    state.games.push(data);
-    console.log('after: ' && state.games);
+  addGame(state, game) {
+    state.games.push(game);
   },
-  // deleteGame(state, data) {
-
-  // },
+  deleteGame(state, id) {
+    state.games = state.games.filter((game) => game.id !== id);
+  },
 };
 
 export default {

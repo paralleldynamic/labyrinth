@@ -9,7 +9,7 @@
         <button id="add-game-button" @click="showAddGameModal = true">
           <ph-plus-circle :size="30" />
         </button>
-        <button id="refresh-game-list-button" hidden>
+        <button id="refresh-game-list-button" @click="fetchGames(refresh = true)">
           <ph-arrow-counter-clockwise :size="30"/>
         </button>
     </div>
@@ -28,7 +28,7 @@
   <div class="game-list-sidebar-container">
     <GameDetailSidebar :show="showGameDetailSidebar"
              @toggleSidebar="toggleSidebar"
-             :card="activeCard" />
+             :game="activeCard" />
   </div>
 </template>
 
@@ -59,18 +59,21 @@ export default {
   },
   methods: {
     ...mapActions(['refreshGames', 'createGame', 'getGames']),
-    toggleSidebar(card) {
+    toggleSidebar(game) {
+      console.log(game);
       if (!this.activeCard) {
-        this.activeCard = card;
+        this.activeCard = game;
         this.showGameDetailSidebar = !this.showGameDetailSidebar;
-      } else if (card.id !== this.activeCard.id) {
-        this.activeCard = card;
+      } else if (game.id !== this.activeCard.id) {
+        this.activeCard = game;
         if (!this.showGameDetailSidebar) { this.showGameDetailSidebar = true; }
-      } else if (card.id === this.activeCard.id) {
+      } else if (game.id === this.activeCard.id) {
         this.showGameDetailSidebar = !this.showGameDetailSidebar;
       }
     },
-    async fetchGames() {
+    async fetchGames(refresh = false) {
+      if (!refresh && !!this.games) { return; }
+
       const { accessToken } = this.$store.state.auth;
       this.getGames(accessToken)
         .catch((error) => {
@@ -89,15 +92,14 @@ export default {
 
 <style scoped>
 .game-list-container {
-  display: flex;
   height: 100%;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  width: 100%;
 }
 
 .game-list-header {
   display: grid;
   grid-template-columns: auto min-content;
+  align-items: center;
   width: 100%;
 }
 
@@ -114,6 +116,7 @@ export default {
   margin: 5px;
   background-color: transparent;
   border: none;
+  height: min-content;
 }
 
 h2, h3 {
