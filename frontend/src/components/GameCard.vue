@@ -1,5 +1,5 @@
 <template>
-  <content-card>
+  <content-card @click="cardClicked()">
     <template v-slot:card-image>
       <img v-bind:src="game.logo_img_src"
            v-bind:alt="game.logo_img_alt"
