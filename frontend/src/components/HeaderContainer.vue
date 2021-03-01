@@ -2,7 +2,7 @@
   <div id="header-container">
     <header>
       <div class="header-left">
-        <ph-list id="site-menu" :size="20" />
+        <ph-list id="site-menu" :size="20" style="color: #FBFBFF"/>
       </div>
       <div class="header-center">
         <nav id="navbar-menu">
