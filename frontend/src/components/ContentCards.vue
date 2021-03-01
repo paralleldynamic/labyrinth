@@ -57,7 +57,7 @@ export default {
   box-shadow: 0 5px 10px #191919;
   border-radius: 3px;
   box-sizing: border-box;
-  max-width: 25%;
+  max-width: 25vw;
   padding: 0.25em;
   margin: 0.5em;
   background-color: #FBFBFF;
