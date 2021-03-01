@@ -13,13 +13,15 @@
         </button>
     </div>
     <div class="card-container">
-      <ContentCards />
+      <ContentCards @cardClicked="showGameDetailSidebar = !showGameDetailSidebar" />
     </div>
     <div class="modal-container">
-      <add-game-modal id="add-game-form"
-             :show="showAddGameModal"
-             @close="showAddGameModal = false" />
+      <add-game-modal :show="showAddGameModal"
+                      @close="showAddGameModal = false" />
     </div>
+  </div>
+  <div class="game-detail-sidebar-container">
+    <sidebar :show="showGameDetailSidebar" />
   </div>
 </template>
 
@@ -27,16 +29,19 @@
 import { mapActions } from 'vuex';
 import ContentCards from '@/components/ContentCards.vue';
 import AddGameModal from '@/components/AddGameModal.vue';
+import Sidebar from '@/components/Sidebar.vue';
 
 export default {
   name: 'Games',
   components: {
     ContentCards,
     AddGameModal,
+    Sidebar,
   },
   data() {
     return {
       showAddGameModal: false,
+      showGameDetailSidebar: false,
     };
   },
   methods: {

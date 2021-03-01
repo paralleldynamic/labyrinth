@@ -20,7 +20,8 @@
                 required />
         </div>
       </div>
-      <button type="submit">Log In</button>      <strong><em><p v-if="showError"
+      <button type="submit">Log In</button>
+      <strong><em><p v-if="showError"
                      class="error-message"
                      id="registration-error">{{ responseMessage }}</p></em></strong>
     </form>
