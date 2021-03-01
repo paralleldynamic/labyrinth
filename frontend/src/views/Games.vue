@@ -2,7 +2,7 @@
   <div class="game-list-container">
     <div class="game-list-header">
       <div class="game-list-title">
-        <h2>P Alexander's Compendium of the Marvellous and Fantastic</h2>
+        <h2>P. Alexander's Compendium of the Marvellous and Fantastic</h2>
         <h3>a Breviary of Catalogued Portals Into the Unseen Sights of Vivid Imagination</h3>
       </div>
       <div class="game-list-control-container">
