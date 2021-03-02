@@ -20,7 +20,7 @@ export default {
 
 <style>
 .card {
-  box-shadow: 0 5px 10px #191919;
+  box-shadow: 0 2px 4px #191919;
   border-radius: 3px;
   box-sizing: border-box;
   min-height: 17vh;
@@ -47,7 +47,7 @@ export default {
 }
 
 .card-description > * {
-  text-align: justify;
+  text-align: center;
   font-size: smaller;
   margin: 0.5em;
 }
