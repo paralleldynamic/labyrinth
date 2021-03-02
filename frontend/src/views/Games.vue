@@ -107,6 +107,7 @@ export default {
   display: flex;
   align-items: left;
   width: min-content;
+  margin-right: 1em;
 }
 
 .game-list-control-container > button {
@@ -118,6 +119,7 @@ export default {
 
 h2, h3 {
   text-align: center;
+  margin-left: 2em;
 }
 
 h2 {
