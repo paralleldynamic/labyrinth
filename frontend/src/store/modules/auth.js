@@ -6,6 +6,7 @@ const state = {
   username: null,
   accessToken: null,
   authenticated: null,
+  userIsAdmin: false,
 };
 
 const getters = {
