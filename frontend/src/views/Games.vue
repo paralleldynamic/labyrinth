@@ -2,8 +2,13 @@
   <div class="game-list-container">
     <div class="game-list-header">
       <div class="game-list-title">
-        <h2>P. Alexander's Compendium of the Marvellous and Fantastic</h2>
-        <h3>a Breviary of Catalogued Portals Into the Unseen Sights of Vivid Imagination</h3>
+        <h2 v-if="!showGameDetailSidebar">
+          P. Alexander's Compendium of the Marvellous and Fantastic
+        </h2>
+        <h3 v-if="!showGameDetailSidebar">
+          a Breviary of Catalogued Portals Into the Unseen Sights of Vivid Imagination
+        </h3>
+        <h2 v-if="showGameDetailSidebar">The Compendium</h2>
       </div>
       <div class="game-list-control-container">
         <button id="add-game-button" @click="showAddGameModal = true">
@@ -28,9 +33,9 @@
   <div class="game-list-sidebar-container">
     <GameDetailSidebar :show="showGameDetailSidebar"
              @toggleSidebar="toggleSidebar"
-             :game="activeCard" />
+             v-model:game="activeCard" />
   </div>
-</template>
+</template>v
 
 <script>
 import { mapActions } from 'vuex';
@@ -136,4 +141,8 @@ h3 {
   flex-wrap: wrap;
   grid-auto-rows: auto;
 }
+
+ .game-list-control-container > button:hover {
+   color: #3185FC;
+ }
 </style>

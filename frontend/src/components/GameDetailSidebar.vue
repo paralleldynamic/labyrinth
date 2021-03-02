@@ -5,10 +5,12 @@
             v-bind:src="game.logo_img_src"
             v-bind:alt="game.logo_img_alt"
             v-bind:style="game.logo_img_style">
-      <p>{{ game.tagline }}</p>
+      <div v-if="!edit">
+        <p>{{ game.tagline }}</p>
+      </div>
     </template>
     <template v-slot:sidebar-content>
-      <div class="sidebar-content-container">
+      <div class="sidebar-content-container" v-if="!edit">
         <h1>{{ game.title }}</h1>
         <div id="publisher-website">
           <p>Publisher Website:
@@ -36,13 +38,59 @@
           <p>cinematic</p>
         </div>
       </div>
+      <div class="sidebar-content-form" v-if="edit">
+        <form id="add-game-sidebar-form" @submit.prevent="submit">
+          <label for="title">Title</label>
+          <input type="text"
+                name="title"
+                v-bind:placeholder="game.title ? game.title : 'title'"/>
+
+          <label for="tagline">Tagline</label>
+          <input type="text"
+                name="tagline"
+                v-bind:placeholder="game.tagline ? game.tagline : 'tagline'"/>
+
+          <label for="publisher">Publisher</label>
+          <input type="text"
+                name="publisher"
+                v-bind:placeholder="game.publisher ? game.publisher : 'publisher'"/>
+
+          <label for="publisher_website">Label</label>
+          <input type=""
+                name="publisher_website"
+                v-bind:placeholder=
+                  "game.publisher_website ? game.publisher_website : 'publisher website'"/>
+
+          <label for="description">Description</label>
+          <input type="text"
+                name="description"
+                v-bind:placeholder="game.description ? game.description : 'description'"/>
+          <div id="scales">
+          </div>
+          <div id="tags">
+          </div>
+        </form>
+      </div>
     </template>
     <template v-slot:sidebar-footer>
       <div class="sidebar-controls">
-        <button @click="toggleEdit" v-if="true"><ph-pencil-line :size="24" /></button>
-        <button @click="submitUpdate" v-if="true"><ph-floppy-disk :size="24" /></button>
-        <button @click="submitDelete" v-if="true"><ph-trash :size="24" /></button>
-        <button @click="toggleSidebar(game)" v-if="true"><ph-x-circle :size="24" /></button>
+        <button @click="toggleEdit">
+          <ph-pencil-line v-if="!edit" :size="24" />
+          <ph-eraser v-if="edit" :size="24" />
+        </button>
+        <button @click="submitUpdate"
+                v-if="edit">
+          <ph-floppy-disk :size="24" />
+        </button>
+        <button @click="submitDelete"
+                id="delete-button"
+                v-if="edit">
+          <ph-trash :size="24" />
+        </button>
+        <button @click="toggleSidebar(game)"
+                v-if="true">
+          <ph-x-circle :size="24" />
+        </button>
       </div>
     </template>
   </sidebar>
@@ -57,6 +105,11 @@ export default {
   components: {
     Sidebar,
   },
+  data() {
+    return {
+      edit: false,
+    };
+  },
   props: [
     'show',
     'game',
@@ -67,8 +120,10 @@ export default {
   methods: {
     ...mapActions(['deleteGame']),
     toggleSidebar(game) {
-      console.log(game.id);
       this.$emit('toggleSidebar', game);
+    },
+    toggleEdit() {
+      this.edit = !this.edit;
     },
     async submitDelete() {
       // const { id } = this.game;
@@ -100,6 +155,10 @@ export default {
   text-justify: newspaper;
 }
 
+#add-game-sidebar-form {
+  display: grid;
+}
+
  #tags {
    display: flex;
  }
@@ -117,4 +176,12 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
+ .sidebar-controls > button:hover {
+   color: #3185FC;
+ }
+
+ #delete-button:hover {
+   color: #F03A47;
+ }
 </style>
