@@ -60,7 +60,6 @@ export default {
   methods: {
     ...mapActions(['refreshGames', 'createGame', 'getGames']),
     toggleSidebar(game) {
-      console.log(game);
       if (!this.activeCard) {
         this.activeCard = game;
         this.showGameDetailSidebar = !this.showGameDetailSidebar;
