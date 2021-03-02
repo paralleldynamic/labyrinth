@@ -23,6 +23,8 @@ export default {
   box-shadow: 0 5px 10px #191919;
   border-radius: 3px;
   box-sizing: border-box;
+  min-height: 17vh;
+  max-height: 20vh;
   max-width: 25vw;
   padding: 0.25em;
   margin: 0.5em;

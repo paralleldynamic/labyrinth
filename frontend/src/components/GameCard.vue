@@ -5,9 +5,6 @@
            v-bind:alt="game.logo_img_alt"
            v-bind:style="game.logo_img_style">
     </template>
-    <template v-slot:card-title>
-      <h2>{{ game.title }}</h2>
-    </template>
     <template v-slot:card-description>
       <p>{{ game.tagline }}</p>
     </template>
