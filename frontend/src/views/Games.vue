@@ -109,8 +109,6 @@ export default {
 
 .game-list-control-container {
   display: flex;
-  align-items: left;
-  width: min-content;
   margin-right: 1em;
 }
 

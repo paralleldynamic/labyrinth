@@ -143,6 +143,9 @@ export default {
 }
 
 #game-logo {
+  padding: 1em;
+  box-sizing: content-box;
+  background-color: #191919;
   max-width: 100%;
   max-height: 100%;
 }
