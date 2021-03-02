@@ -2,7 +2,7 @@
   <transition name="slide">
     <div @click.stop
          v-if="show"
-         class="sidebar-panel">
+         class="sidebar">
       <slot />
     </div>
   </transition>
@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style scoped>
-.sidebar-panel {
+.sidebar {
   background-color: #FBFBFF;
   box-shadow: 0 2px 4px #191919;
   display: flex;
