@@ -3,8 +3,8 @@ from flask_jwt_extended import jwt_required
 from flask_restx import Resource, marshal
 from sqlalchemy.exc import IntegrityError
 
-from .contracts import ns, game
-from .models import Game as GameDAO
+from .contracts import ns, game, publisher
+from .models import Game as GameDAO, Publisher as PublisherDAO
 
 @ns.route('/')
 class GameList(Resource):
@@ -16,7 +16,7 @@ class GameList(Resource):
         return GameDAO.get_list()
 
     @ns.response(201, 'Game successfully created.')
-    @ns.response(500, "Unhandled servor error.")
+    @ns.response(500, "Unhandled server error.")
     @ns.doc('create a new game')
     @ns.expect(game, Validate=True)
     @jwt_required
@@ -41,7 +41,7 @@ class GameList(Resource):
         except Exception as e:
             response_object = {
                 "status": "fail",
-                "message": "Unhandled servor error."
+                "message": "Unhandled server error."
             }
             response_code = 500
             print(e)
@@ -49,7 +49,7 @@ class GameList(Resource):
         finally:
             return response_object, response_code
 
-@ns.route('/<id>')
+@ns.route('/id/<id>')
 @ns.param('id', 'Unique id of game')
 @ns.response(404, 'Game not found.')
 class Game(Resource):
@@ -64,8 +64,21 @@ class Game(Resource):
         else:
             return game, 200
 
+    @ns.response(200, "Success.")
+    @ns.response(500, "Unhandled server error.")
+    @ns.doc("Update a game using the id. Expects a game.")
+    @ns.expect(game, Validate=True)
+    @jwt_required
+    def post(self, id):
+        """Update a game from the database given its public ID."""
+        data = request.form or request.json
+        game = GameDAO.get_by_id(id)
+        if not game:
+            ns.abort(404)
+
+
     @ns.response(200, "Game successfully deleted.")
-    @ns.doc("Delete a game using the title as a reference. This endpoint is not case sensitive.")
+    @ns.doc("Delete a game using the id as a reference.")
     @jwt_required
     def delete(self, id):
         """Delete a game from the database using its title."""

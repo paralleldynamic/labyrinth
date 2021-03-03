@@ -50,21 +50,29 @@
                 name="tagline"
                 v-bind:placeholder="game.tagline ? game.tagline : 'tagline'"/>
 
+          <label for="game_website">Website for the game itself</label>
+          <input type=""
+                name="game_website"
+                v-bind:placeholder=
+                  "game.website ? game.website : 'game website'"/>
+
           <label for="publisher">Publisher</label>
           <input type="text"
                 name="publisher"
                 v-bind:placeholder="game.publisher ? game.publisher : 'publisher'"/>
 
-          <label for="publisher_website">Label</label>
+          <label for="publisher_website">Publisher website URL</label>
           <input type=""
                 name="publisher_website"
                 v-bind:placeholder=
-                  "game.publisher_website ? game.publisher_website : 'publisher website'"/>
+                  "game.publisher.website ? game.publisher.website : 'publisher website'"/>
 
-          <label for="description">Description</label>
-          <input type="text"
-                name="description"
-                v-bind:placeholder="game.description ? game.description : 'description'"/>
+          <label for="description">Description.</label>
+          <textarea name="description"
+                    rows="10"
+                    cols="50">
+            {{ game.description ? game.description : 'description' }}
+          </textarea>
           <div id="scales">
           </div>
           <div id="tags">

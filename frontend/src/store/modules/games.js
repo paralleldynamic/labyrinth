@@ -40,7 +40,7 @@ const actions = {
   },
   /* eslint-disable-next-line */
   async deleteGame({ commit }, { id, accessToken }) {
-    const endpoint = `game/${id}`;
+    const endpoint = `game/id/${id}`;
     const promise = axios.delete(endpoint,
       { headers: { Authorization: `Bearer ${accessToken}` } });
 
